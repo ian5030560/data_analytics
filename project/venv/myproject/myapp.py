@@ -9,7 +9,7 @@ def hello():
 
 
 @app.route("/chart", methods=["GET", "POST"])
-def login():
+def chart():
     return render_template("chart.html")
 
 
