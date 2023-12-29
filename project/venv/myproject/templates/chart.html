@@ -55,9 +55,8 @@
         style="margin-right: 10px"
       />
       <form method="POST" action="/chart">
-        請選擇要查看的地區
-        <select name="area" class="btn btn-info dropdown-toggle">
-          <option value="0">0</option>
+        請選擇要查看的年級
+        <select name="age" class="btn btn-info dropdown-toggle">
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -67,8 +66,11 @@
           <option value="7">7</option>
           <option value="8">8</option>
           <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
         </select>
-        <input type="submit" class="btn btn-info" name="area_select" value="送出" style="margin-left: 5px"/>
+        <input type="submit" class="btn btn-info" name="age_select" value="送出" style="margin-left: 5px"/>
       </form>
     </div>
 
@@ -98,23 +100,31 @@
           type: chart_type,
           data: {
             labels: [
-              "一年級",
-              "二年級",
-              "三年級",
-              "四年級",
-              "五年級",
-              "六年級",
-              "七年級",
-              "八年級",
-              "九年級",
-              "十年級",
-              "十一年級",
-              "十二年級",
+              "臺北市",
+              "新北市",
+              "桃園市",
+              "臺中市",
+              "臺南市",
+              "高雄市",
+              "基隆市",
+              "新竹市",
+              "苗栗縣",
+              "彰化縣",
+              "南投縣",
+              "雲林縣",
+              "嘉義縣",
+              "屏東縣",
+              "宜蘭縣",
+              "花蓮縣",
+              "臺東縣",
+              "澎湖縣",
+              "金門縣",
+              "連江縣",
             ],
             datasets: [
               {
                 label: "答對題數",
-                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,],
               },
             ],
           },
