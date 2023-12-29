@@ -1,31 +1,75 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-    <div style="display:flex; align-items:baseline;">
-    <input type="button" class="btn btn-light" value="長條圖" onClick="changeChartType('bar');" style="margin-right: 5px;"/>
-    <input type="button" class="btn btn-light" value="圓餅圖" onClick="changeChartType('pie');" style="margin-right: 5px;"/>
-    <input type="button" class="btn btn-light" value="折線圖" onClick="changeChartType('line');" style="margin-right: 5px;"/>
-    <input type="button" class="btn btn-light" value="甜甜圈圖" onClick="changeChartType('doughnut');" style="margin-right: 5px;"/>
-    <input type="button" class="btn btn-light" value="極座標圓餅圖" onClick="changeChartType('polarArea');" style="margin-right: 5px;"/>
-    <input type="button" class="btn btn-light" value="雷達圖" onClick="changeChartType('radar');" style="margin-right: 5px;"/>
-    <form method=”POST”>
-      請選擇要查看的地區
-      <select name="number">
-        <option> 0 </option>
-        <option> 1 </option>
-        <option> 2 </option>
-        <option> 3 </option>
-        <option> 4 </option>
-        <option> 5 </option>
-        <option> 6 </option>
-        <option> 7 </option>
-        <option> 8 </option>
-        <option> 9 </option>
-  </select>
-  <input type="submit" name="area_select" value="送出">
-    </form>
+    
+    <br />
+    <div style="display: flex; align-items: baseline">
+      <input
+        type="button"
+        class="btn btn-info"
+        value="長條圖"
+        onClick="changeChartType('bar');"
+        style="margin-left: 25px; margin-right: 10px"
+      />
+      <input
+        type="button"
+        class="btn btn-info"
+        value="圓餅圖"
+        onClick="changeChartType('pie');"
+        style="margin-right: 10px"
+      />
+      <input
+        type="button"
+        class="btn btn-info"
+        value="折線圖"
+        onClick="changeChartType('line');"
+        style="margin-right: 10px"
+      />
+      <input
+        type="button"
+        class="btn btn-info"
+        value="甜甜圈圖"
+        onClick="changeChartType('doughnut');"
+        style="margin-right: 10px"
+      />
+      <input
+        type="button"
+        class="btn btn-info"
+        value="極座標圓餅圖"
+        onClick="changeChartType('polarArea');"
+        style="margin-right: 10px"
+      />
+      <input
+        type="button"
+        class="btn btn-info"
+        value="雷達圖"
+        onClick="changeChartType('radar');"
+        style="margin-right: 10px"
+      />
+      <form method="POST" action="/chart" >
+        請選擇要查看的地區
+        <select name="area">
+          <option>0</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+        </select>
+        <input type="submit" class="btn btn-info" name="area_select" value="送出" style="margin-left: 5px"/>
+      </form>
     </div>
 
     <div style="height: 60%; width: 60%">
