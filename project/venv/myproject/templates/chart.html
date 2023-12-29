@@ -2,14 +2,31 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-
   <body>
-    <input type="button" value="長條圖" onClick="changeChartType('bar');" />
-    <input type="button" value="圓餅圖" onClick="changeChartType('pie');" />
-    <input type="button" value="折線圖" onClick="changeChartType('line');" />
-    <input type="button" value="甜甜圈圖" onClick="changeChartType('doughnut');"/>
-    <input type="button" value="極座標圓餅圖" onClick="changeChartType('polarArea');"/>
-    <input type="button" value="雷達圖" onClick="changeChartType('radar');" />
+    <div style="display:flex; align-items:baseline;">
+    <input type="button" class="btn btn-light" value="長條圖" onClick="changeChartType('bar');" style="margin-right: 5px;"/>
+    <input type="button" class="btn btn-light" value="圓餅圖" onClick="changeChartType('pie');" style="margin-right: 5px;"/>
+    <input type="button" class="btn btn-light" value="折線圖" onClick="changeChartType('line');" style="margin-right: 5px;"/>
+    <input type="button" class="btn btn-light" value="甜甜圈圖" onClick="changeChartType('doughnut');" style="margin-right: 5px;"/>
+    <input type="button" class="btn btn-light" value="極座標圓餅圖" onClick="changeChartType('polarArea');" style="margin-right: 5px;"/>
+    <input type="button" class="btn btn-light" value="雷達圖" onClick="changeChartType('radar');" style="margin-right: 5px;"/>
+    <form method=”POST”>
+      請選擇要查看的地區
+      <select name="number">
+        <option> 0 </option>
+        <option> 1 </option>
+        <option> 2 </option>
+        <option> 3 </option>
+        <option> 4 </option>
+        <option> 5 </option>
+        <option> 6 </option>
+        <option> 7 </option>
+        <option> 8 </option>
+        <option> 9 </option>
+  </select>
+  <input type="submit" name="area_select" value="送出">
+    </form>
+    </div>
 
     <div style="height: 60%; width: 60%">
       <canvas id="myChart"></canvas>
