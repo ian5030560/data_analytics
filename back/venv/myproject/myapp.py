@@ -8,13 +8,9 @@ def hello():
     return "Hello, World!"
 
 
-def index():
-    return render_template("index.html")
-
-
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/chart", methods=["GET", "POST"])
 def login():
-    return render_template("login.html")
+    return render_template("chart.html")
 
 
 if __name__ == "__main__":
