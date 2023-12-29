@@ -11,7 +11,7 @@ def hello():
 @app.route("/chart", methods=["GET", "POST"])
 def chart():
     if request.method == "POST":
-        if request.values["send"] == "送出":
+        if request.values["area_select"] == "送出":
             area = request.form["area_select"]
             print(area)
             return "123"
