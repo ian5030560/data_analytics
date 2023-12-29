@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from db import getData
 
 app = Flask(__name__)
 
@@ -14,6 +15,7 @@ def chart():
         if request.values["area_select"] == "送出":
             area = request.form["area_select"]
             print(area)
+            print("kh", getData("kh"))
             return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     else:
         return render_template("chart.html")
