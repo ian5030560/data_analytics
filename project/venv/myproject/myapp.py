@@ -14,7 +14,7 @@ def chart():
         if request.values["area_select"] == "送出":
             area = request.form["area_select"]
             print(area)
-            return "123"
+            return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     else:
         return render_template("chart.html")
 
