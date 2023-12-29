@@ -12,12 +12,14 @@ def hello():
 @app.route("/chart", methods=["GET", "POST"])
 def chart():
     if request.method == "POST":
-        if request.values["area_select"] == "送出":
-            generate = request.form["area_select"]
-            print("generate:", generate)
-            outputList = getData(generate)
-            print("outputList:", outputList)
-            return outputList
+        if request.form["age_select"] == "送出":
+            grade = request.form["age"]
+            print("grade:", grade)
+            data = getData(grade)
+            print("data:", data)
+            return render_template(
+                "chart.html", data_people=people, data_correct=correct
+            )
     else:
         return render_template("chart.html")
 
