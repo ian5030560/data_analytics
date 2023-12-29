@@ -16,7 +16,7 @@ def chart():
             print(area)
             return "123"
     else:
-        return render_template("chart.html", name=request.values["user"])
+        return render_template("chart.html")
 
 
 if __name__ == "__main__":
