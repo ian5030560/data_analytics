@@ -1,7 +1,7 @@
 import sqlite3
 import time
 
-# 尋找該年級每個地區的答對題數、答題數、總人數
+# 尋找該年級每個地區的答題數、答對題數、總人數
 def getData(grade: int):
     con = sqlite3.connect("sql.db")
     user = "user"
@@ -10,39 +10,40 @@ def getData(grade: int):
     cursor = con.cursor()
 
     cursor.execute(
-        f"""SELECT "city", COUNT({problem}.upid), 
-        SUM(CASE WHEN {problem}.is_correct = 1 THEN 1 ELSE 0 END),
-        COUNT(DISTINCT {user}.uuid)
+        f"""SELECT {user}."city", COUNT({problem}.upid) AS "total_problem", 
+        SUM(CASE WHEN {problem}.is_correct = 1 THEN 1 ELSE 0 END) AS "total_correct", 
+        COUNT(DISTINCT {user}.uuid) AS "total_people"
         FROM {user}
         JOIN {problem} ON {user}.uuid = {problem}.uuid
         WHERE {user}.grade = {grade}
-        GROUP BY "city";
+        GROUP BY {user}."city";
         """
     )
-
+    
     return list(map(list, cursor.fetchall()))
 
-# REGIONS = {
-#     "chc": "Chiayi",
-#     "cy": "Chiayi City",
-#     "hc": "Hsinchu City",
-#     "hlc": "Hualien City",
-#     "ilc": "Yilan City",
-#     "kh": "Kaohsiung City",
-#     "kl": "Keelung City",
-#     "km": "Kinmen",
-#     "lj": "Lienchiang",
-#     "ml": "Miaoli",
-#     "ntct": "Nantou",
-#     "ntpc": "New Taipei",
-#     "phc": "Pingtung",
-#     "tc": "Taitung City",
-#     "tn": "Tainan",
-#     "tp": "Taipei",
-#     "tcct": "Taitung County",
-#     "ty": "Taoyuan",
-#     "ylc": "Yunlin",
-# }
+REGIONS = {
+    "chc": "彰化",
+    "cy": "嘉義",
+    "hc": "新竹",
+    "hlc": "花蓮",
+    "ilc": "宜蘭",
+    "kh": "高雄",
+    "kl": "基隆",
+    "km": "金門",
+    "lj": "連江",
+    "ml": "苗栗",
+    "ntct": "南投",
+    "ntpc": "新北",
+    "phc": "澎湖",
+    "ptc": "屏東",
+    "tc": "台中",
+    "tn": "台南",
+    "tp": "台北",
+    "ttct": "台東",
+    "ty": "桃園",
+    "ylc": "雲林"
+}
 
 # if __name__ == "__main__":
 #     s = time.time()
