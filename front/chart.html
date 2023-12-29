@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+    <input type="button" value="長條圖" onClick="changeChartType('bar');" />
+    <input type="button" value="圓餅圖" onClick="changeChartType('pie');" />
+    <input type="button" value="折線圖" onClick="changeChartType('line');" />
+    <input type="button" value="甜甜圈圖" onClick="changeChartType('doughnut');"/>
+    <input type="button" value="極座標圓餅圖" onClick="changeChartType('polarArea');"/>
+    <input type="button" value="雷達圖" onClick="changeChartType('radar');" />
+
+    <div style="height: 60%; width: 60%">
+      <canvas id="myChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+      var chart_type = "bar";
+      var myChart;
+
+      function changeChartType(type) {
+        chart_type = type;
+        updateChart();
+      }
+
+      function updateChart() {
+        // Destroy the existing chart (if any)
+        if (myChart) {
+          myChart.destroy();
+        }
+
+        // Create a new chart with the updated type
+        myChart = new Chart(document.getElementById("myChart"), {
+          type: chart_type,
+          data: {
+            labels: [
+              "一年級",
+              "二年級",
+              "三年級",
+              "四年級",
+              "五年級",
+              "六年級",
+              "七年級",
+              "八年級",
+              "九年級",
+              "十年級",
+              "十一年級",
+              "十二年級",
+            ],
+            datasets: [
+              {
+                label: "答對題數",
+                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+              },
+            ],
+          },
+        });
+      }
+
+      // Initial chart creation
+      updateChart();
+    </script>
+  </body>
+</html>
