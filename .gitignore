@@ -2,4 +2,5 @@
 raw_data/Info_Content.csv
 raw_data/Info_UserData.csv
 raw_data/Log_Problem.csv
+sql.db
 raw_data/dump.py
