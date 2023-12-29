@@ -12,7 +12,11 @@ def hello():
 def chart():
     if request.method == "POST":
         if request.values["send"] == "送出":
-            return render_template("chart.html", name=request.values["user"])
+            area = request.form["area_select"]
+            print(area)
+            return "123"
+    else:
+        return render_template("chart.html", name=request.values["user"])
 
 
 if __name__ == "__main__":
