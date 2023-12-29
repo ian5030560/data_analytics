@@ -1,16 +1,18 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def hello():
-    return "Hello, World!"
+    return "BigData analytics!"
 
 
 @app.route("/chart", methods=["GET", "POST"])
 def chart():
-    return render_template("chart.html")
+    if request.method == "POST":
+        if request.values["send"] == "送出":
+            return render_template("chart.html", name=request.values["user"])
 
 
 if __name__ == "__main__":
