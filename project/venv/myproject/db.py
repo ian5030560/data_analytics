@@ -1,45 +1,35 @@
 import sqlite3
 import time
 
-# 尋找該地區的全部年級的各個答對題數
-def getData(region: str):
+# 尋找該年級每個地區的答對題數、答題數、總人數
+def getData(grade: int):
     con = sqlite3.connect("sql.db")
-    userTable = "user"
-    problemTable = "problem"
+    user = "user"
+    problem = "problem"
 
     cursor = con.cursor()
 
     cursor.execute(
-        f"""SELECT {userTable}.grade, COUNT(is_correct) FROM {userTable} 
-        JOIN {problemTable} ON {userTable}.uuid = {problemTable}.uuid
-        WHERE city = "{region}" AND is_correct = 1
-        GROUP BY {userTable}.grade;
+        f"""SELECT "city", COUNT({problem}.upid), 
+        SUM(CASE WHEN {problem}.is_correct = 1 THEN 1 ELSE 0 END),
+        COUNT(DISTINCT {user}.uuid)
+        FROM {user}
+        JOIN {problem} ON {user}.uuid = {problem}.uuid
+        WHERE {user}.grade = {grade}
+        GROUP BY "city";
         """
     )
 
     return list(map(list, cursor.fetchall()))
-    
-# def getRegion():
-#     con = sqlite3.connect("sql.db")
-#     userTable = "user"
-
-#     cursor = con.cursor()
-
-#     cursor.execute(
-#         f"""SELECT {userTable}.city FROM {userTable} 
-#         GROUP BY {userTable}.city;
-#         """
-#     )
-    
-#     print(len(cursor.fetchall()))
 
 # REGIONS = {
 #     "chc": "Chiayi",
 #     "cy": "Chiayi City",
 #     "hc": "Hsinchu City",
-#     "hlc": 
-#     "kh": "Kaohsiung",
-#     "kl": "Keelung",
+#     "hlc": "Hualien City",
+#     "ilc": "Yilan City",
+#     "kh": "Kaohsiung City",
+#     "kl": "Keelung City",
 #     "km": "Kinmen",
 #     "lj": "Lienchiang",
 #     "ml": "Miaoli",
@@ -52,8 +42,10 @@ def getData(region: str):
 #     "tcct": "Taitung County",
 #     "ty": "Taoyuan",
 #     "ylc": "Yunlin",
-    
 # }
 
 # if __name__ == "__main__":
-#     getRegion()
+#     s = time.time()
+#     print(getData(1))
+#     e = time.time()
+#     print(e - s)
