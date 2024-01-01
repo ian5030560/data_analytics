@@ -4,23 +4,27 @@ import time
 # 尋找該年級每個地區的答題數、答對題數、總人數
 def getData(grade: int):
     con = sqlite3.connect("sql.db")
-    user = "user"
-    problem = "problem"
 
     cursor = con.cursor()
-
+    g = f"grade{grade}"
+    
     cursor.execute(
-        f"""SELECT {user}."city", COUNT({problem}.upid) AS "total_problem", 
-        SUM(CASE WHEN {problem}.is_correct = 1 THEN 1 ELSE 0 END) AS "total_correct", 
-        COUNT(DISTINCT {user}.uuid) AS "total_people"
-        FROM {user}
-        JOIN {problem} ON {user}.uuid = {problem}.uuid
-        WHERE {user}.grade = {grade}
-        GROUP BY {user}."city";
+        f"""SELECT user.city, COUNT({g}.upid) AS "total_problem", 
+        SUM(CASE WHEN {g}.is_correct = 1 THEN 1 ELSE 0 END) AS "total_correct", 
+        COUNT(DISTINCT user.uuid) AS "total_people"
+        FROM user
+        JOIN {g} ON user.uuid = {g}.uuid
+        GROUP BY user.city;
         """
     )
-    
     return list(map(list, cursor.fetchall()))
+    
+speedList = [None for _ in range(12)]
+def testSpeed(grade: int):
+    s = time.time()
+    getData(grade)
+    e = time.time()
+    speedList[grade - 1] = e - s
 
 REGIONS = {
     "chc": "彰化",
@@ -44,9 +48,14 @@ REGIONS = {
     "ty": "桃園",
     "ylc": "雲林"
 }
-
-# if __name__ == "__main__":
-#     s = time.time()
-#     print(getData(1))
-#     e = time.time()
-#     print(e - s)
+        
+    
+    
+if __name__ == "__main__":
+    
+    for t in range(len(speedList)):
+        testSpeed(t + 1)
+        
+    print(f"平均值: {sum(speedList) / len(speedList)}")
+    print(f"最大值: {max(speedList)}")
+    print(f"最小值: {min(speedList)}")
