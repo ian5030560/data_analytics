@@ -1,107 +1,161 @@
 <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+      crossorigin="anonymous"
+    />
+  </head>
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous" />
-</head>
+  <body>
+    <br />
+    <div style="display: flex; align-items: baseline">
+      <input
+        type="button"
+        class="btn btn-info"
+        value="長條圖"
+        onClick="changeChartType('bar');"
+        style="margin-left: 25px; margin-right: 10px"
+      />
+      <input
+        type="button"
+        class="btn btn-info"
+        value="折線圖"
+        onClick="changeChartType('line');"
+        style="margin-right: 10px"
+      />
+      <input
+        type="button"
+        class="btn btn-info"
+        value="雷達圖"
+        onClick="changeChartType('radar');"
+        style="margin-right: 10px"
+      />
+      <input
+        type="button"
+        class="btn btn-info"
+        value="圓餅圖"
+        onClick="changeChartType('pie');"
+        style="margin-right: 10px"
+      />
 
-<body>
+      <input
+        type="button"
+        class="btn btn-info"
+        value="甜甜圈圖"
+        onClick="changeChartType('doughnut');"
+        style="margin-right: 10px"
+      />
+      <input
+        type="button"
+        class="btn btn-info"
+        value="極座標圓餅圖"
+        onClick="changeChartType('polarArea');"
+        style="margin-right: 10px"
+      />
 
-  <br />
-  <div style="display: flex; align-items: baseline">
-    <input type="button" class="btn btn-info" value="長條圖" onClick="changeChartType('bar');"
-      style="margin-left: 25px; margin-right: 10px" />
-    <input type="button" class="btn btn-info" value="圓餅圖" onClick="changeChartType('pie');"
-      style="margin-right: 10px" />
-    <input type="button" class="btn btn-info" value="折線圖" onClick="changeChartType('line');"
-      style="margin-right: 10px" />
-    <input type="button" class="btn btn-info" value="甜甜圈圖" onClick="changeChartType('doughnut');"
-      style="margin-right: 10px" />
-    <input type="button" class="btn btn-info" value="極座標圓餅圖" onClick="changeChartType('polarArea');"
-      style="margin-right: 10px" />
-    <input type="button" class="btn btn-info" value="雷達圖" onClick="changeChartType('radar');"
-      style="margin-right: 10px" />
-    <form method="POST" action="/chart">
-      <span class="fw-bolder">請選擇要查看的年級</span>
-      <select name="age" class="btn btn-info dropdown-toggle" style="margin-left: 5px">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-      </select>
-      <input type="submit" class="btn btn-info" name="age_option" value="送出" style="margin-left: 5px" />
-    </form>
-  </div>
+      <form method="POST" action="/chart">
+        <span class="fw-bolder">請選擇要查看的年級</span>
+        <select
+          name="age"
+          class="btn btn-info dropdown-toggle"
+          style="margin-left: 5px"
+        >
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+        </select>
+        <input
+          type="submit"
+          class="btn btn-info"
+          name="age_option"
+          value="送出"
+          style="margin-left: 5px"
+        />
+      </form>
+    </div>
 
-  <div style="height: 60%; width: 60%">
-    <canvas id="myChart"></canvas>
-  </div>
+    <div style="height: 80%; width: 80%">
+      <canvas id="myChart"></canvas>
+    </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <script>
-    var chart_type = "bar";
-    var myChart;
+    <script>
+      var chart_type = "bar";
+      var myChart;
+      
 
-    function changeChartType(type) {
-      chart_type = type;
-      updateChart();
-    }
-
-    function updateChart() {
-      // Destroy the existing chart (if any)
-      if (myChart) {
-        myChart.destroy();
+      function changeChartType(type) {
+        chart_type = type;
+        updateChart();
       }
 
-      // Create a new chart with the updated type
-      myChart = new Chart(document.getElementById("myChart"), {
-        type: chart_type,
-        data: {
-          labels: [
-            "臺北市",
-            "新北市",
-            "桃園市",
-            "臺中市",
-            "臺南市",
-            "高雄市",
-            "基隆市",
-            "新竹市",
-            "苗栗縣",
-            "彰化縣",
-            "南投縣",
-            "雲林縣",
-            "嘉義縣",
-            "屏東縣",
-            "宜蘭縣",
-            "花蓮縣",
-            "臺東縣",
-            "澎湖縣",
-            "金門縣",
-            "連江縣",
-          ],
-          datasets: [
-            {
-              label: "答對題數",
-              data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,],
-            },
-          ],
-        },
-      });
-    }
+      function updateChart() {
+        // Destroy the existing chart (if any)
+        if (myChart) {
+          myChart.destroy();
+        }
 
-    // Initial chart creation
-    updateChart();
-  </script>
-</body>
+        // Create a new chart with the updated type
+        myChart = new Chart(document.getElementById("myChart"), {
+          type: chart_type,
+          data: {
+            labels: [
+              "臺北市",
+              "新北市",
+              "桃園市",
+              "臺中市",
+              "臺南市",
+              "高雄市",
+              "基隆市",
+              "新竹市",
+              "苗栗縣",
+              "彰化縣",
+              "南投縣",
+              "雲林縣",
+              "嘉義縣",
+              "屏東縣",
+              "宜蘭縣",
+              "花蓮縣",
+              "臺東縣",
+              "澎湖縣",
+              "金門縣",
+              "連江縣",
+            ],
+            datasets: [
+              {
+                label: "答題人數",
+                data: [
+                  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                  19, 20,
+                ],
+              },
+              {
+                label: "答對率",
+                data: [
+                  3, 4, 5, 6, 7, 8, 9, 10, 11, 10, 5, 1, 5, 14, 18, 7, 2, 3, 4,
+                  2,
+                ],
+              },
+            ],
+          },
+        });
+      }
 
+      // Initial chart creation
+      updateChart();
+    </script>
+  </body>
 </html>
