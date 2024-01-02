@@ -11,6 +11,7 @@
 
   <body>
     <h1>{{ data_people }}</h1>
+    <h1>{{ data_correct }}</h1>
     <br />
     <div style="display: flex; align-items: baseline">
       <input
@@ -83,6 +84,8 @@
           name="age_option"
           value="送出"
           style="margin-left: 5px"
+          onclick="changeChartData({{data_people}},{{data_correct}})"
+
         />
       </form>
     </div>
@@ -96,12 +99,8 @@
     <script>
       var chart_type = "bar";
       var myChart;
-      var data_people = [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-      ];
-      var data_correct = [
-        3, 4, 5, 6, 7, 8, 9, 10, 11, 10, 5, 1, 5, 14, 18, 7, 2, 3, 4, 2,
-      ];
+      var data_people = [];
+      var data_correct = [];
 
       function changeChartType(type) {
         chart_type = type;
