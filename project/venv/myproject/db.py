@@ -2,7 +2,10 @@ import sqlite3
 import time
 
 # 尋找該年級每個地區的答題數、答對題數、總人數
-def getData(grade: int):
+def getData(grade: int)-> list[list[str, int, int, int]]:
+    """
+    @return list[list[str, int, int, int]]: a list includes many lists of 地區、答對題數、總人數
+    """
     con = sqlite3.connect("sql.db")
 
     cursor = con.cursor()
@@ -52,10 +55,10 @@ REGIONS = {
     
     
 if __name__ == "__main__":
-    
-    for t in range(len(speedList)):
-        testSpeed(t + 1)
+    print(getData(8))
+    # for t in range(len(speedList)):
+    #     testSpeed(t + 1)
         
-    print(f"平均值: {sum(speedList) / len(speedList)}")
-    print(f"最大值: {max(speedList)}")
-    print(f"最小值: {min(speedList)}")
+    # print(f"平均值: {sum(speedList) / len(speedList)}")
+    # print(f"最大值: {max(speedList)}")
+    # print(f"最小值: {min(speedList)}")
