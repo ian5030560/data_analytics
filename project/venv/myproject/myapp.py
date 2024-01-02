@@ -12,7 +12,7 @@ def hello():
 @app.route("/chart", methods=["GET", "POST"])
 def chart():
     # DB來的縣市順序
-    order = [16, 11, 18, 14, 15, 5, 6, 2, 9, 0, 10, 19, 1, 13, 4, 3, 17, 12, 7, 8]
+    order = [15, 10, 17, 13, 14, 5, 6, 2, 8, 0, 9, 18, 1, 12, 4, 3, 16, 11, 19, 7]
     if request.method == "POST":
         if request.form["age_option"] == "送出":
             grade = request.form["age"]
