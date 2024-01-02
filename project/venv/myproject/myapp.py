@@ -12,13 +12,15 @@ def hello():
 @app.route("/chart", methods=["GET", "POST"])
 def chart():
     if request.method == "POST":
-        if request.form["age_select"] == "送出":
+        if request.form["age"] == "送出":
             grade = request.form["age"]
             print("grade:", grade)
-            data = getData(grade)
-            print("data:", data)
+            ans_num, correct_num, people = getData(grade)
+            print("data:", ans_num, correct_num, people)
+            correct_percentage = round(correct_num / ans_num, 1)
+            print("correct percentage:", correct_percentage)
             return render_template(
-                "chart.html", data_people=people, data_correct=correct
+                "chart.html", data_people=people, data_correct=correct_percentage
             )
     else:
         return render_template("chart.html")
