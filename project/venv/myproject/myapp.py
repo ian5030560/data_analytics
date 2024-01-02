@@ -11,14 +11,21 @@ def hello():
 
 @app.route("/chart", methods=["GET", "POST"])
 def chart():
+    order = [16, 11, 18, 14, 15, 5, 6, 2, 9, 0, 10, 19, 1, 13, 4, 3, 17, 12, 7, 8]
     if request.method == "POST":
         if request.form["age_option"] == "送出":
             grade = request.form["age"]
             print("grade:", grade)
-            ans_num, correct_num, people = getData(grade)
-            print("data:", ans_num, correct_num, people)
-            correct_percentage = round(correct_num / ans_num, 1)
-            print("correct percentage:", correct_percentage)
+            data = getData(grade)
+            print("data:", data)
+            people = []
+            correct_percentage = []
+            for i in order:
+                people.append(data[i][3])
+                percentage = round(int(data[i][2]) * 100 / int(data[i][1]), 1)
+                correct_percentage.append(percentage)
+            print("people:", people)
+            print("correct percentage", correct_percentage)
             return render_template(
                 "chart.html", data_people=people, data_correct=correct_percentage
             )
