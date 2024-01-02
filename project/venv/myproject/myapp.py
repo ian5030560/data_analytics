@@ -11,21 +11,34 @@ def hello():
 
 @app.route("/chart", methods=["GET", "POST"])
 def chart():
+    # DB來的縣市順序
     order = [16, 11, 18, 14, 15, 5, 6, 2, 9, 0, 10, 19, 1, 13, 4, 3, 17, 12, 7, 8]
     if request.method == "POST":
         if request.form["age_option"] == "送出":
             grade = request.form["age"]
             print("grade:", grade)
+
             data = getData(grade)
-            print("data:", data)
+
             people = []
             correct_percentage = []
+
+            if data[7][0] != "km":
+                data.append(["km", 1, 0, 0])
+            else:
+                km = data[7]
+                data.remove(data[7])
+                data.append(km)
+            print("data:", data)
+
             for i in order:
                 people.append(data[i][3])
                 percentage = round(int(data[i][2]) * 100 / int(data[i][1]), 1)
                 correct_percentage.append(percentage)
+
             print("people:", people)
             print("correct percentage", correct_percentage)
+
             return render_template(
                 "chart.html", data_people=people, data_correct=correct_percentage
             )
@@ -33,6 +46,7 @@ def chart():
             # Handle the case when request.form["age"] is not "送出"
             return render_template("chart.html")
     else:
+        # Handle the case when request.form["age"] is not "送出"
         return render_template("chart.html")
 
 
