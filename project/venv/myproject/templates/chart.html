@@ -10,6 +10,7 @@
   </head>
 
   <body>
+    <h1>{{ data_people }}</h1>
     <br />
     <div style="display: flex; align-items: baseline">
       <input
@@ -104,6 +105,12 @@
 
       function changeChartType(type) {
         chart_type = type;
+        updateChart();
+      }
+
+      function changeChartData(data1,data2) {
+        data_people = data1;
+        data_correct = data2;
         updateChart();
       }
 
