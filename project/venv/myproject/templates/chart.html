@@ -86,7 +86,7 @@
       </form>
     </div>
 
-    <div style="height: 80%; width: 80%">
+    <div style="position: relative; height: 80vh; width: 80vw">
       <canvas id="myChart"></canvas>
     </div>
 
@@ -95,7 +95,12 @@
     <script>
       var chart_type = "bar";
       var myChart;
-      
+      var data_people = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+      ];
+      var data_correct = [
+        3, 4, 5, 6, 7, 8, 9, 10, 11, 10, 5, 1, 5, 14, 18, 7, 2, 3, 4, 2,
+      ];
 
       function changeChartType(type) {
         chart_type = type;
@@ -137,17 +142,11 @@
             datasets: [
               {
                 label: "答題人數",
-                data: [
-                  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                  19, 20,
-                ],
+                data: data_people,
               },
               {
                 label: "答對率",
-                data: [
-                  3, 4, 5, 6, 7, 8, 9, 10, 11, 10, 5, 1, 5, 14, 18, 7, 2, 3, 4,
-                  2,
-                ],
+                data: data_correct,
               },
             ],
           },
